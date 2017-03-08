@@ -15,15 +15,33 @@ npm start
 <strong>Modules:</strong><br>
 <ul>
   <li>
-    Express
+    bcrypt-nodejs
   </li>
   <li>
-    Helmet
+    body-parser
   </li>
   <li>
-    Consign
+    consign
   </li>
   <li>
-    Body-parser
+    express
+  </li>
+  <li>
+    express-validator
+  </li>
+  <li>
+    helmet
+  </li>
+  <li>
+    jwt-simple
+  </li>
+  <li>
+    mongoose
+  </li>
+  <li>
+    passport
+  </li>
+  <li>
+    passport-jwt
   </li>
 <ul>
