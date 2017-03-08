@@ -19,16 +19,16 @@ module.exports = function(app) {
 
                 User.findOne({
                     email: email
-                }, function(err, usuario) {
-                    if (usuario && !err) {
-                        if (usuario.validarSenha(usuario.senha, senha)) {
+                }, function(err, user) {
+                    if (user && !err) {
+                        if (user.validarSenha(user.senha, senha)) {
                             const playload = {
-                                _id: usuario._id
+                                _id: user._id
                             };
                             res.json({
                                 token: jwt.encode(playload, 'S3C43T*!*&8!*&!'),
-                                nome: usuario.nome,
-                                _id: usuario._id
+                                nome: user.nome,
+                                _id: user._id
                             }).end();
                         } else {
                             // app.libs.logger.error(err);

@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 module.exports = function() {
 
     var schema = new Schema({
-        nome: {
+        name: {
             type: String,
             required: true
         },
@@ -16,7 +16,7 @@ module.exports = function() {
                 unique: true
             }
         },
-        senha: {
+        password: {
             type: String,
             required: true
         },
