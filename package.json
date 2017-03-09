@@ -2,9 +2,10 @@
   "name": "api_chat",
   "version": "1.0.0",
   "description": "API REST em nodejs<br> Case: <strong>Chat Online</strong>",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "export NODE_ENV=dev && set NODE_ENV=dev && node app.js",
+    "test": "export NODE_ENV=test && set NODE_ENV=test && mocha --timeout 10000"
   },
   "repository": {
     "type": "git",
@@ -19,13 +20,20 @@
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
+    "config": "^1.25.1",
     "consign": "^0.1.2",
     "express": "^4.15.2",
     "express-validator": "^3.1.2",
     "helmet": "^3.4.1",
     "jwt-simple": "^0.5.1",
     "mongoose": "^4.8.6",
+    "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-jwt": "^2.2.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.2.0"
   }
 }

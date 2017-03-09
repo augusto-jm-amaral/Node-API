@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
+var config = require('config');
 
 module.exports = function(app) {
 
-    mongoose.connect('mongodb://localhost/api', { server: { poolSize: 30 }});
+    mongoose.connect(config.DBHost, { server: { poolSize: 30 }});
 
     // mongoose.connection.on('connected',  () => {
     //   console.log('Mongoose:: Conectado em ' + cfg.url);

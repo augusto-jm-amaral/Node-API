@@ -22,7 +22,8 @@ module.exports = function() {
         },
         permission: {
         	type: String,
-        	enum: ['admin', 'common']
+        	enum: ['admin', 'common'],
+            required: true
         },
         create: {
             type: Number,
@@ -30,11 +31,9 @@ module.exports = function() {
             default: new Date().getTime()
         },
         update: {
-            type: String,
+            type: Number,
             require: true,
-            index: {
-                unique: true
-            }
+            default: new Date().getTime()
         }
     });
 

@@ -1,17 +1,20 @@
 var express = require('express'),
-    // compression = require('compression'),
     bodyParser = require('body-parser'),
-    helmet = require('helmet');
+    helmet = require('helmet'),
+    config = require('config'),
+    morgan = require('morgan');
+    // compression = require('compression'),
     // expressValidator = require('express-validator'),
     // customValidators = require('./validators.js')()
-    // morgan = require('morgan'),
     // path = require('path'),
     // FileStreamRotator = require('file-stream-rotator'),
     // logger = require("../libs/logger");
 
 module.exports = function(app) {
 
-  // app.use(morgan('combined', {stream: logger.stream}))
+    if(config.util.getEnv('NODE_ENV') !== 'test'){
+        app.use(morgan('combined'));
+    }
 
     app.set('port', 3000);
 
