@@ -2,14 +2,14 @@ const bcrypt = require('bcrypt-nodejs');
 
 module.exports = function (app) {
 	
-	const User = app.models.User;
+	const User = app.libs.db.models.User;
 
   app.route('/user/:_id')
     .get(function(req, res){
 
       req.checkParams('_id', '').notEmpty().isMongoId();
 
-      var erros = req.validationErros();
+      var erros = req.validationErrors();
 
       if(!erros){
 
@@ -43,12 +43,12 @@ module.exports = function (app) {
       req.checkBody('email', '').notEmpty().isEmail();
       req.checkBody('password', '').notEmpty().isAlphanumeric();
 
-      var erros = req.validationErros();
+      var erros = req.validationErrors();
 
       if(!erros){
 
         var user = new User(req.body);
-        user = user.encriptarSenha(user);
+        user = User.encriptarSenha(user);
         user.permission = 'common';
 
         user.save(function(err){
