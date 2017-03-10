@@ -1,6 +1,11 @@
-var io = require('socket.io');
+var io = require('socket.io'),
+    redis = require('socket.io-redis');
 
 module.exports = function (app) {
 
-	return io(app.libs.http);	
+	var socketServer = io(app.libs.http);
+
+	socketServer.adapter(redis({ host: 'localhost', port: 6379 }));
+
+	return socketServer;	
 };
