@@ -5,15 +5,6 @@ module.exports = function(app) {
 
     mongoose.connect(config.DBHost, { server: { poolSize: 30 }});
 
-    // mongoose.connection.on('connected',  () => {
-    //   console.log('Mongoose:: Conectado em ' + cfg.url);
-    //   mongoose.set('debug', function (collectionName, method, query, e) {
-
-    //     app.libs.logger.info(collectionName+'.'+ method + '(' + JSON.stringify(query) + ',' + JSON.stringify(e) +')');
-
-    //   });
-    // });
-
     mongoose.connection.on('disconnected',  () => {
       console.log('Mongoose:: Desconectado de ');
     });

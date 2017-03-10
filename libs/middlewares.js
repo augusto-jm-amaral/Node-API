@@ -20,7 +20,7 @@ module.exports = function(app) {
 
     app.set('port', 3000);
 
-    app.libs.db.set('debug', true);
+    app.libs.db.set('debug', false);
 
     app.use(helmet());
     app.use(bodyParser.json());

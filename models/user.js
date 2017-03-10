@@ -23,6 +23,7 @@ module.exports = function() {
         permission: {
         	type: String,
         	enum: ['admin', 'common'],
+            default: 'common',
             required: true
         },
         create: {
@@ -37,26 +38,18 @@ module.exports = function() {
         }
     });
 
-    schema.method('encripitarSenha', function(usuario) {
-        var salt = bcrypt.genSaltSync();
-        usuario.senha = bcrypt.hashSync(usuario.senha, salt);
-        return usuario;
-    });
-
-    schema.method('gerarSenha', function(senha) {
-        var salt = bcrypt.genSaltSync();
-        senha = bcrypt.hashSync(senha, salt);
+    schema.methods.validPass = function(pass){
         
-        return senha;
-    });
+        return bcrypt.compareSync(pass, this.password);;
+    };
 
-    schema.method('validarSenha', function(encodedPassword, password) {
-        return bcrypt.compareSync(password, encodedPassword);
-    });
+    schema.pre('save', function (next) {
 
-    schema.method('validarUsuario', function(sessionUser, usuario) {
-        // return (sessionUser._id == usuario._id) && (sessionUser.email === usuario.email);
-        return (sessionUser._id == usuario._id);
+        var salt = bcrypt.genSaltSync();
+
+        this.password = bcrypt.hashSync(this.password, salt);
+
+        next();
     });
 
     return mongoose.model('User', schema);

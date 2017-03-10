@@ -48,7 +48,6 @@ module.exports = function (app) {
       if(!erros){
 
         var user = new User(req.body);
-        user = User.encriptarSenha(user);
         user.permission = 'common';
 
         user.save(function(err){
