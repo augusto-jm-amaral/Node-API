@@ -1,9 +1,6 @@
 //Importa o framework Express e o middleware Consign
-var express = require('express');
-var consign = require('consign');
-
-//Instância do Express
-var app = express();
+var app = require('express')(),
+    consign = require('consign');
 
 //Injeção utilizando Consign
 consign({verbose: true})
@@ -11,6 +8,8 @@ consign({verbose: true})
   .then('models')
   .then('./libs/auth.js')
   .then('./libs/middlewares.js')
+  .then('./libs/http.js')
+  .then('./libs/io.js')
   .then('routes')
   .then('./libs/boot.js')
   .into(app);

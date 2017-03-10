@@ -1,0 +1,17 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/augusto-jm-amaral/Node-API",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "socket.io-client": "^1.7.2"
+  }
+}

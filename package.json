@@ -29,7 +29,8 @@
     "mongoose": "^4.8.6",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1"
+    "passport-jwt": "^2.2.1",
+    "socket.io": "^1.7.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",

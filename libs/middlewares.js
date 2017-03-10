@@ -25,5 +25,5 @@ module.exports = function(app) {
     app.use(helmet());
     app.use(bodyParser.json());
 
-    // app.use(express.static('./public'));
+    app.use(express.static('./public'));
 }
