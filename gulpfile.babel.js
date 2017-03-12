@@ -5,13 +5,9 @@ import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 import buffer from 'vinyl-buffer';
 import envify from 'loose-envify/custom';
+import sassify from 'sassify';
 
 var $ = plugins({ pattern: '*' });
-
-// function handleError (error) {
-// 	console.log(error,toString());
-// 	this.emit('end');
-// };
 
 var cfg = {
 	from: './_src',
@@ -20,29 +16,12 @@ var cfg = {
 
 gulp.task('html', () => {
 	gulp.src([cfg.from + '/**/*.html'])
-			   // .pipe($.changed(cfg.to, {extension: '.html'}))	
 			   .pipe($.filesize())
 			   .pipe($.htmlmin({collapseWhitespace: true}))
 			   .pipe(gulp.dest(cfg.to));
 });
 
-// gulp.task('css', () => {
-// 	gulp.src([
-// 				'./bower_components/bootstrap/dist/css/bootstrap.min.css',
-// 				cfg.from + '/assets/sass/**/*.scss'
-// 			])
-// 		  	   // .pipe($.changed(cfg.to + '/assets/css', {extension: '.css'}))
-// 			   .pipe($.sass())
-// 		       .on('error', handleError)
-// 			   .pipe($.cssnano())
-// 		       .on('error', handleError)
-// 			   .pipe($.minifyCss())
-// 			   .pipe($.concat('styles.min.css'))
-// 			   .pipe($.filesize())
-// 		       .pipe(gulp.dest(cfg.to + '/assets/css/'));
-// });
-
-gulp.task('js', () => {
+gulp.task('bundle', () => {
 
   return browserify({
 	    extensions: ['.jsx', '.js'],
@@ -52,6 +31,11 @@ gulp.task('js', () => {
 	      presets: ["es2015", "react"],
 	      ignore: /(node_modules)/
 	    }))
+	    .transform(sassify, {
+        'auto-inject': true, // Inject css directly in the code 
+        base64Encode: false, 
+        sourceMap: false 
+      })
 	    .transform(
 	      envify({
 	        _: 'purge', NODE_ENV: 'production'
@@ -65,9 +49,8 @@ gulp.task('js', () => {
 });
 
 gulp.task('watch', () => {
-	let html = gulp.watch([cfg.from + '/**/*.html'], ['html']);
-	// let css = gulp.watch([cfg.from + '/assets/sass/**/*.scss'], ['css']);
-	let js = gulp.watch([cfg.from + '/**/*.js', cfg.from + '/**/*.jsx'], ['js']);
+	gulp.watch([cfg.from + '/**/*.html'], ['html']);
+	gulp.watch([cfg.from + '/**/*.js', cfg.from + '/**/*.jsx', cfg.from + '/**/*.scss'], ['bundle']);
 });
 
 gulp.task('browser-sync', () => {
@@ -78,6 +61,6 @@ gulp.task('browser-sync', () => {
 	});
 });
 
-gulp.task('default', ['html', 'js', 'watch', 'browser-sync', ]);
+gulp.task('default', ['html', 'bundle', 'watch', 'browser-sync', ]);
 
 
