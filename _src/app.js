@@ -1,34 +1,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-import counter from './reducers';
-import Counter from './components/Counter';
+import App from './pages/app/app'
+import Home from './pages/home/home'
+import Login from './pages/login/login'
+// const store = createStore(counter);
 
-// let store = createStore(myReducer);
-
-// store.subscribe(() =>
-//   console.log(store.getState())
-// );
-
-// store.dispatch({ type: 'INCREMENT' })
-// // 1
-// store.dispatch({ type: 'INCREMENT' })
-// // 2
-// store.dispatch({ type: 'DECREMENT' })
-// // 1
-
-const store = createStore(counter);
 const rootEl = document.getElementById('root');
 
+const router = (
+	<Router history={ hashHistory }>
+    <Route path="/" component={ App }>
+      <IndexRoute component={ Home } />
+		  <Route path="/login" component={ Login } />
+		</Route>
+	</Router>
+	);
+
 const render = () => ReactDOM.render(
-  <Counter
-    value={store.getState()}
-    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-  />,
+  router,
   rootEl
 );
 
 render();
-store.subscribe(render);
+// store.subscribe(render);

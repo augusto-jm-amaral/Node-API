@@ -15,7 +15,7 @@ var cfg = {
 };
 
 gulp.task('html', () => {
-	gulp.src([cfg.from + '/**/*.html'])
+	return gulp.src([cfg.from + '/**/*.html'])
 			   .pipe($.filesize())
 			   .pipe($.htmlmin({collapseWhitespace: true}))
 			   .pipe(gulp.dest(cfg.to));
@@ -61,6 +61,6 @@ gulp.task('browser-sync', () => {
 	});
 });
 
-gulp.task('default', ['html', 'bundle', 'watch', 'browser-sync', ]);
+gulp.task('default', ['html', 'bundle', 'watch', 'browser-sync']);
 
 
