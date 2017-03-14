@@ -10,10 +10,14 @@ import Login from './pages/login/login'
 
 const rootEl = document.getElementById('root');
 
+hashHistory.listen( location => {
+  console.log(location);
+});
+
 const router = (
 	<Router history={ hashHistory }>
     <Route path="/" component={ App }>
-      <IndexRoute component={ Home } />
+      <IndexRoute component={ Home }/>
 		  <Route path="/login" component={ Login } />
 		</Route>
 	</Router>

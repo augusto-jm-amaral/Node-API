@@ -1,10 +1,13 @@
-export default (state = 0, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state + 1
-    case 'DECREMENT':
-      return state - 1
-    default:
-      return state
-  }
-};
+import { ChangeRoute } from './../actions';
+
+const initialState = {
+	token: ''
+}
+
+
+App (state = initialState, action) => {
+
+}
+
+return default App
+
