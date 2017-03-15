@@ -1,13 +1,19 @@
-import { ChangeRoute } from './../actions';
+import { ChangeRoute } from './../actions'
+import * as types from '../constants'
 
 const initialState = {
 	token: ''
 }
 
-
-App (state = initialState, action) => {
-
+const appStore = (state = initialState, action) => {
+	switch (action.type) {
+		case types.CHANGE_ROUTE:
+			console.log(state);
+			return Object.assign({}, state, action.data)
+		default:
+			return state
+	}
 }
 
-return default App
+export default appStore
 
