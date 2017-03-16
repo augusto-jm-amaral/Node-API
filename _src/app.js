@@ -6,11 +6,10 @@ import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
 import App from './pages/app/app'
 import Home from './pages/home/home'
-import Login from './pages/login/login'
+import Login from './pages/login/Login'
 import AppStore from './reducers';
 
 import { changeRoute } from './actions';
-
 
 const rootEl = document.getElementById('root');
 const store = createStore(AppStore);

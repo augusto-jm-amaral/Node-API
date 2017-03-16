@@ -25,7 +25,7 @@ gulp.task('bundle', () => {
 
   return browserify({
 	    extensions: ['.jsx', '.js'],
-	    entries: './_src/app.js'
+	    	entries: './_src/app.js'
 	    })
 	    .transform(babelify.configure({
 	      presets: ["es2015", "react"],
@@ -35,13 +35,14 @@ gulp.task('bundle', () => {
         'auto-inject': true, // Inject css directly in the code 
         base64Encode: false, 
         sourceMap: false 
-      })
+      	})
 	    .transform(
 	      envify({
 	        _: 'purge', NODE_ENV: 'production'
 	      }), { global: true })
+	    .add('node_modules/bootstrap/dist/css/bootstrap.min.css')
 	    .bundle()
-	    .on("error", function (err) { console.log("Error : " + err.message); this.emit('end'); })
+	    .on("error", function (err) { console.log("Error : " + err.message); console.log("Error : " + err); this.emit('end'); })
 	    .pipe(source('bundle.min.js'))
 	    .pipe(buffer())
 	    .pipe($.uglify())
