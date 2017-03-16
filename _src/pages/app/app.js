@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
+import { hashHistory } from 'react-router';
+import { Store } from 'redux';
 
 class App extends Component {
 	constructor (props) {
 		super(props);
+	}
+
+	componentWillMount() {
 
 	}
 
@@ -16,5 +21,7 @@ class App extends Component {
 		);
 	}
 }
+
+App.contextTypes = { store: React.PropTypes.object };
 
 export default App; 

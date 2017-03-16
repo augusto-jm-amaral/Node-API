@@ -14,13 +14,17 @@ import { changeRoute } from './actions';
 const rootEl = document.getElementById('root');
 const store = createStore(AppStore);
 
-hashHistory.listen( location => store.dispatch(changeRoute(location)) );
+const authorizationHandle = (e) => {
+	if(!store.getState().token){
+		hashHistory.push('/login');
+	}
+}
 
 const router = (
   <Provider store={ store }>
   	<Router history={ hashHistory }>
       <Route path="/" component={ App }>
-        <IndexRoute component={ Home }/>
+        <IndexRoute component={ Home } onEnter={authorizationHandle}/>
   		  <Route path="/login" component={ Login } />
   		</Route>
   	</Router>
